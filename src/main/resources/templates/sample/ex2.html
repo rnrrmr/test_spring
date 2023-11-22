@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ex2 Title</title>
+    <style>
+        .target{
+            background-color: sandybrown;
+        }
+    </style>
+</head>
+<body>
+<!-- 삼항조건 연산자 5의 배수일 때 CSS style(background-color)-->
+<ul>
+    <li th:each="dto, state : ${list}" th:class="${dto.sno%5==0}?'target'" th:text="${dto}"></li>
+</ul>
+
+<!--<ul>
+    <li th:each="dto : ${list}">   for문이랑 비슷한거 // ex2 속성에 저장한 리스트
+        [[${dto}]]   sampleDTO가 가지고 있는 문자열 값을 출력해줌
+    </li>
+</ul>-->
+
+<ul>
+    <li th:each="dto, state : ${list}">   <!-- state 반복문의 상태-->
+        [[${state.index}]]-----[[${dto}]]
+    </li>
+</ul>
+
+<!-- sno값이 5의 배수일때만 dto 문자열을 출력 -->
+<ul>
+    <li th:each="dto, state : ${list}" th:if="${dto.sno % 5 == 0}">
+        [[${dto}]]
+    </li>
+</ul>
+
+<!-- 5의 배수면 ----------+sno 출력  / 아니면 first 출력 -->
+<ul>
+    <li th:each="dto, state : ${list}">
+        <span th:if="${dto.sno % 5 == 0}" th:text="${'---------' + dto.sno}"></span>
+        <span th:unless="${dto.sno % 5 == 0}" th:text="${dto.first}"></span>
+    </li>
+</ul>
+
+<!-- 삼항조건 연산자 -->
+<ul>
+    <li th:each="dto, state : ${list}" th:text="${dto.sno%5==0}?${dto.sno}:${dto.first}"></li>
+</ul>
+
+</body>
+</html>

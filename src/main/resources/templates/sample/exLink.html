@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ex4 Title</title>
+</head>
+<body>
+<!-- 숫자 형식 지정  #은 타임리프 기본객체 사용할때 씀 -->
+<ul>
+    <li th:each="dto : ${list}">
+        [[${#numbers.formatInteger(dto.sno, 3)}]]
+    </li>
+</ul>
+
+<!-- 날짜 및 시간 형식지정 -->
+<ul>
+    <li th:each="dto : ${list}">
+        [[${dto.sno}]]  ----  [[${#temporals.format(dto.regTime, 'yyyy/MM/dd')}]]
+    </li>
+</ul>
+
+<ul>
+    <li th:each="dto : ${list}">
+        [[${dto.sno}]]  ----  [[${#temporals.format(dto.regTime, 'HH:mm:ss a')}]]
+    </li>
+</ul>
+
+<ul>
+    <li th:each="dto : ${list}">
+        [[${dto.sno}]]  ----  [[${#temporals.format(dto.regTime, 'hh:mm:ss a')}]]
+    </li>
+</ul>
+
+<!--
+1. th:href 속성의 값: "/sample/exView"
+2. th:href 속성의 값: "/sample/exView?sno=1"
+3. th:href 속성의 값: "/sample/exView/1"
+-->
+<ul>
+    <li th:each="dto : ${list}">
+        <a th:href="@{/sample/exView}">[[${dto}]]</a><br>
+        <a th:href="@{/sample/exView(sno=${dto.sno})}">[[${dto}]]</a><br>
+        <a th:href="@{/sample/exView/{sno}(sno=${dto.sno})}">[[${dto}]]</a><br>
+    </li>
+</ul>
+
+
+
+
+</body>
+</html>
